@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Mysql insert query</title>
+  </head>
+  <body>
+    <main class="flex flex-col justify-center items-center h-screen bg-red-400">
+      <h1 class="fixed top-1 text-3xl">Mysql insert query</h1>
+
+      <div
+        id="item"
+        class="flex justify-start w-1/2 bg-red-900 h-150 flex-col items-center p-5"
+      >
+        <h2 class="text-3xl mb-10">Fill the form</h2>
+        <img src="images/Database.jpg" alt="" class="h-50 rounded-xl mb-5" />
+        <form>
+          <div class="flex flex-col mb-5">
+            <label for="name" class="text-xl">Name</label>
+            <input
+              type="text"
+              id="name"
+              class="p-2 rounded-lg bg-red-300 text-black"
+            />
+          </div>
+          <div class="flex flex-col mb-5">
+            <label for="email" class="text-xl">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="p-2 rounded-lg bg-red-300 text-black"
+            />
+          </div>
+          <button
+            type="button"
+            id="submit"
+            class="bg-red-500 p-2 rounded-lg text-white hover:bg-red-600 transition duration-300"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
