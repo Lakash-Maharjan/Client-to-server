@@ -21,15 +21,14 @@ conn.connect((err) => {
 });
 const app = express();
 
-app.use(express.static("public"));
-
 app.use(cors());
 app.use(express.json());
 
 app.set("views", path.join(__dirname, "views"));
+app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 
-app.get("/form", (request, response) => {
+app.get("/", (request, response) => {
   response.render("index");
 });
 
@@ -44,11 +43,11 @@ app.post("/", (req, res) => {
   });
 });
 
-app.get("/", (req, res) => {
+app.get("/retrive", (req, res) => {
   conn.query("SELECT * from users", function (err, rows) {
     if (!err) {
-      res.send(JSON.stringify(rows[0]));
-      console.log("rows:", rows[0]);
+      res.send(JSON.stringify(rows));
+      console.log("rows:", rows);
     } else {
       console.log("Error while performing Query.");
     }
