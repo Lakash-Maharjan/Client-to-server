@@ -15,7 +15,11 @@
         class="flex justify-start w-1/2 bg-red-900 h-150 flex-col items-center p-5"
       >
         <h2 class="text-3xl mb-10">Fill the form</h2>
-        <img src="images/Database.jpg" alt="" class="h-50 rounded-xl mb-5" />
+        <img
+          src="images/Database.jpg"
+          alt="image"
+          class="h-50 rounded-xl mb-5"
+        />
         <form>
           <div class="flex flex-col mb-5">
             <label for="name" class="text-xl">Name</label>
@@ -43,6 +47,33 @@
         </form>
       </div>
     </main>
-    <script src="script.js"></script>
+    <script>
+      console.log(
+        "This is a test log message to check if the script is running correctly."
+      );
+
+      document.getElementById("submit").addEventListener("click", () => {
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+
+        if (name && email) {
+          console.log("Name:", name);
+          console.log("Email:", email);
+        } else {
+          console.error("Please fill in both fields.");
+        }
+        return fetch("/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name, email }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Success:", data);
+          });
+      });
+    </script>
   </body>
 </html>

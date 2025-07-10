@@ -2,13 +2,16 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2");
 const cors = require("cors");
+const path = require("path");
 const port = 3000;
+
 const conn = mysql.createConnection({
   host: "localhost",
   user: "Lakash",
   password: "Lakash@123",
   database: "first",
 });
+
 conn.connect((err) => {
   if (err) {
     console.log("Error connecting to the database:", err);
@@ -18,14 +21,17 @@ conn.connect((err) => {
 });
 const app = express();
 
+app.use(express.static("public"));
+
 app.use(cors());
 app.use(express.json());
 
-// parse application/x-www-form-urlencoded
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
 
-// parse application/json
-// const jsonparser = bodyParser.json();
+app.get("/form", (request, response) => {
+  response.render("index");
+});
 
 app.post("/", (req, res) => {
   const { name, email } = req.body;
@@ -52,9 +58,3 @@ app.get("/", (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-
-// app.use(function (req, res) {
-//   res.setHeader("Content-Type", "text/plain");
-//   res.write("you posted:\n");
-//   res.end(String(JSON.stringify(req.body, null, 2)));
-// });
