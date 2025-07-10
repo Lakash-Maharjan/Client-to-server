@@ -12,7 +12,7 @@ document.getElementById("submit").addEventListener("click", () => {
   } else {
     console.error("Please fill in both fields.");
   }
-  return fetch("/login", {
+  return fetch("/", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

@@ -1,4 +1,8 @@
+const express = require("express");
+const bodyParser = require("body-parser");
 const mysql = require("mysql2");
+const cors = require("cors");
+const port = 3000;
 const conn = mysql.createConnection({
   host: "localhost",
   user: "Lakash",
@@ -12,11 +16,10 @@ conn.connect((err) => {
   }
   console.log("Connected to the database");
 });
-
-const express = require("express");
-const bodyParser = require("body-parser");
-
 const app = express();
+
+app.use(cors());
+app.use(express.json());
 
 // parse application/x-www-form-urlencoded
 // app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,11 +27,7 @@ const app = express();
 // parse application/json
 // const jsonparser = bodyParser.json();
 
-const urlencoded = bodyParser.urlencoded({
-  extended: true,
-});
-
-app.post("/login", urlencoded, (req, res) => {
+app.post("/", (req, res) => {
   const { name, email } = req.body;
   console.log("Name:", name);
   console.log("Email:", email);
@@ -37,6 +36,21 @@ app.post("/login", urlencoded, (req, res) => {
     name,
     email,
   });
+});
+
+app.get("/", (req, res) => {
+  conn.query("SELECT * from users", function (err, rows) {
+    if (!err) {
+      res.send(JSON.stringify(rows[0]));
+      console.log("rows:", rows[0]);
+    } else {
+      console.log("Error while performing Query.");
+    }
+  });
+});
+
+app.listen(port, () => {
+  console.log(`Example app listening on port ${port}`);
 });
 
 // app.use(function (req, res) {
