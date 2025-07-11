@@ -23,6 +23,9 @@ document.getElementById("submit").addEventListener("click", () => {
   } else {
     console.error("Please fill in both fields.");
   }
+
+  document.getElementById("name").value = "";
+  document.getElementById("email").value = "";
 });
 
 document.getElementById("retrive").addEventListener("click", () => {
